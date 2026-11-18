@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d111b"><meta name="color-scheme" content="dark">
+<title>Seoul Signal — Retail Decision Atlas</title>
+<meta name="description" content="Explore 25 Seoul districts, compare electronics sales, and build a transparent pop-up scouting brief using Seoul’s official quarterly estimates.">
+<link rel="icon" href="assets/brand.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/grotesk.ttf" crossorigin>
+</head><body>
+<a class="skip" href="#main">Skip to workspace</a>
+<header class="top"><div class="shell top-inner">
+<a href="#overview" class="brand" aria-label="Seoul Signal overview"><span class="brandmark" aria-hidden="true"></span><span>Seoul <b>Signal</b></span></a>
+<nav class="mainnav" aria-label="Workspace"><a href="#overview" data-nav="overview">Overview</a><a href="#explore" data-nav="explore">Explorer</a><a href="#planner" data-nav="planner">Pilot planner</a><a href="#evidence" data-nav="evidence">Evidence</a></nav>
+<button class="navask" data-act="chat"><span data-icon="spark"></span>Ask Signal</button>
+</div></header>
+<main id="main" tabindex="-1" class="shell"><noscript><h1>Seoul Signal</h1><p>Enable JavaScript to explore the atlas, or <a href="assets/data/quarterly-district-sales.csv">download the original district data</a>.</p></noscript></main>
+<footer class="sitefoot"><div class="shell footerwrap"><div class="footbrand"><span class="brandmark smallmark"></span><strong>Seoul Signal</strong><span class="subtle">Group 2 · Sejong University</span></div><div class="footlinks"><a href="#evidence">Sources &amp; method</a><a id="portable" href="Seoul_Signal_Offline.html" download>Offline edition</a></div></div></footer>
+<dialog id="chat" aria-labelledby="chat-title"><div class="drawer"><header class="chathead"><div class="chatidentity"><i class="assistantmark" data-icon="spark"></i><div><h2 id="chat-title">Ask Signal</h2><p id="chatmode">Evidence guide · on this device</p></div></div><button data-act="chatClose" class="iconbtn" aria-label="Close chat"><span data-icon="x"></span></button></header>
+<div class="chatmessages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+<div class="aibox"><details id="ai-options"><summary>Optional on-device AI</summary><p id="ai-about"></p><button id="ai-toggle" class="minorbutton" data-act="aiLoad">Enable local AI</button><div id="ai-status" role="status"></div></details></div>
+<div class="chatcompose"><div id="suggestions" class="suggestions"></div><form id="chatform"><label class="sr" for="question">Ask a question about your business plan</label><textarea id="question" rows="1" maxlength="1000" placeholder="Tell me about your shop idea…"></textarea><button type="submit" aria-label="Send message" title="Send message"><span data-icon="send"></span></button></form><p>Answers use the project snapshot through 2026 Q2.</p></div></div></dialog>
+<dialog id="proof" aria-labelledby="proof-title"><div class="lighthead"><h2 id="proof-title">Evidence</h2><button data-act="proofClose" class="iconbtn" aria-label="Close evidence"><span data-icon="x"></span></button></div><img id="proof-img" alt=""><div id="proof-note"></div></dialog>
+<div id="notice" role="status"></div>
+<script src="assets/data/snapshot.js"></script><script src="engine.js"></script><script src="assets/seoul-geometry.js"></script><script src="assets/map.js"></script><script src="assets/model.js"></script><script src="ui.js"></script><script src="charts.js"></script><script src="pages.js"></script><script src="brief.js"></script><script src="advisor.js"></script><script src="app.js"></script>
+</body></html>

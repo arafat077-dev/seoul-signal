@@ -1,0 +1,9 @@
+Seoul Signal | Geographic attribution
+
+Municipal district boundaries: JUSO 2015 reference polygons, adapted from Lucy Park and the southkorea/seoul-maps contributors, Apache License 2.0.
+Pinned source: https://github.com/southkorea/seoul-maps/tree/dbb1dcde2e3c9937684c5a44ab9301888ad63ee6
+File: juso/2015/json/seoul_municipalities_topo_simple.json (see source repository for the original series).
+License: assets/licenses/map-apache-2.txt.
+Adaptation: converted topology to simplified planar vectors; used original Korean and English district names and joined the full 25 districts to the sales table. 2015 reference shapes do not describe 2026 street boundaries.
+Water: Han River centerline, Natural Earth 1:10m rivers and lake centerlines, public domain. https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-rivers-lake-centerlines/
+Cartographic overlay: height represents absolute magnitude on a square-root scale. Gains and declines use different colors; orange marks selection. Missing is not zero.
