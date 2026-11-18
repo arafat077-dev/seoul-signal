@@ -1,0 +1,54 @@
+name: Verify Seoul Signal
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verify-seoul-signal
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      pending: ${{ steps.release.outputs.pending }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Verify release contents and district calculations
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f Seoul_Signal_GitHub_Pages.zip && ! -e docs ]]; then
+            echo 'e707d35b491adbe3fd50f3c47df26c873a0c63b2a65aa42dcffffeec43d2d109  Seoul_Signal_GitHub_Pages.zip' | sha256sum --check -
+            unzip -q Seoul_Signal_GitHub_Pages.zip -d "$RUNNER_TEMP/seoul-release"
+            echo 'pending=yes' >> "$GITHUB_OUTPUT"
+            cd "$RUNNER_TEMP/seoul-release"
+          else
+            echo 'pending=no' >> "$GITHUB_OUTPUT"
+          fi
+          node tests/decision-checks.cjs
+          test -s docs/index.html
+          test -s docs/assets/vendor/webllm-0.2.85.mjs
+  install-first-release:
+    needs: check
+    if: needs.check.outputs.pending == 'yes' && github.repository == 'arafat077-dev/seoul-signal' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Commit the verified site, tests and rebuild scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'e707d35b491adbe3fd50f3c47df26c873a0c63b2a65aa42dcffffeec43d2d109  Seoul_Signal_GitHub_Pages.zip' | sha256sum --check -
+          test ! -e docs
+          unzip -q Seoul_Signal_GitHub_Pages.zip 'docs/*' 'tests/*' 'tools/*'
+          git add -- docs tests tools
+          git rm -- Seoul_Signal_GitHub_Pages.zip
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Publish the Seoul Signal atlas, data, evidence and rebuild tools'
+          git push origin HEAD:main
